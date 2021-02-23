@@ -68,6 +68,8 @@ document.querySelector('.btn--new').addEventListener('click', () => {
   player2Current.innerText = 0;
   player1Score.innerText = 0;
   player2Score.innerText = 0;
+  diceRoll.disabled = false;
+  hold.disabled = false;
   chance = 0;
   if (player1.classList.contains('player--winner')) {
     player1.classList.remove('player--winner');
