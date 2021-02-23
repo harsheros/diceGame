@@ -56,6 +56,8 @@ hold.addEventListener('click', () => {
     document
       .querySelector(`.player--${chance}`)
       .classList.add('player--winner');
+    document.querySelector('body').style.background =
+      'linear-gradient(to top left, #367d82 0%, #2ebf46 100%)';
     diceRoll.disabled = true;
     hold.disabled = true;
   }
