@@ -20,15 +20,13 @@ dice.style.display = 'none';
 
 // function to toggle b/w chances.
 function chanceToggle(ch) {
+  player1.classList.toggle('player--active');
+  player2.classList.toggle('player--active');
   if (ch === 1) {
     player2Current.innerText = 0;
-    player1.classList.add('player--active');
-    player2.classList.remove('player--active');
     chance = 0;
   } else {
     player1Current.innerText = 0;
-    player2.classList.add('player--active');
-    player1.classList.remove('player--active');
     chance = 1;
   }
 }
