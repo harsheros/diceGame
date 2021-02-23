@@ -71,15 +71,17 @@ document.querySelector('.btn--new').addEventListener('click', () => {
   diceRoll.disabled = false;
   hold.disabled = false;
   chance = 0;
-  if (player1.classList.contains('player--winner')) {
-    player1.classList.remove('player--winner');
-  } else if (!player1.classList.contains('player--active')) {
-    player1.classList.add('player--active');
-  }
 
-  if (player2.classList.contains('player--winner')) {
-    player2.classList.remove('player--winner');
-  } else if (player2.classList.contains('player--active')) {
-    player2.classList.remove('player--active');
-  }
+  player1.classList.contains('player--winner')
+    ? player1.classList.remove('player--winner')
+    : '';
+
+  !player1.classList.contains('player--active')
+    ? (player1.classList.add('player--active'),
+      player2.classList.remove('player--active'))
+    : '';
+
+  player2.classList.contains('player--winner')
+    ? player2.classList.remove('player--winner')
+    : '';
 });
