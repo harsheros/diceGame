@@ -131,6 +131,7 @@ main {
 
 .btn--new {
   top: 4rem;
+  z-index: 11;
 }
 .btn--roll {
   top: 39.3rem;
