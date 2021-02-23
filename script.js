@@ -22,7 +22,7 @@ dice.style.display = 'none';
 function chanceToggle(ch) {
   player1.classList.toggle('player--active');
   player2.classList.toggle('player--active');
-  document.querySelector(`#current--${ch}`);
+  document.querySelector(`#current--${ch}`).innerText = 0;
   chance = ch === 1 ? 0 : 1;
 }
 
