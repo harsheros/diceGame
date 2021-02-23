@@ -75,7 +75,8 @@ document.querySelector('.btn--new').addEventListener('click', () => {
   diceRoll.disabled = false;
   hold.disabled = false;
   chance = 0;
-
+  document.querySelector('body').style.background =
+    ' linear-gradient(to top left, #753682 0%, #bf2e34 100%)';
   player1.classList.contains('player--winner')
     ? (player1.classList.remove('player--winner'),
       document
