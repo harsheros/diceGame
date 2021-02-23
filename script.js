@@ -52,10 +52,12 @@ hold.addEventListener('click', () => {
 
   //checking if the current player is winner or not
   if (document.querySelector(`#score--${chance}`).innerText >= 100) {
-    alert(`Player ${chance + 1} Win's the game !!! `);
     document
       .querySelector(`.player--${chance}`)
       .classList.add('player--winner');
+    document
+      .querySelector(`.player--${chance} > .player--winGif`)
+      .classList.toggle('hidden');
     document.querySelector('body').style.background =
       'linear-gradient(to top left, #367d82 0%, #2ebf46 100%)';
     diceRoll.disabled = true;
@@ -75,7 +77,10 @@ document.querySelector('.btn--new').addEventListener('click', () => {
   chance = 0;
 
   player1.classList.contains('player--winner')
-    ? player1.classList.remove('player--winner')
+    ? (player1.classList.remove('player--winner'),
+      document
+        .querySelector(`.player--0 > .player--winGif`)
+        .classList.toggle('hidden'))
     : '';
 
   !player1.classList.contains('player--active')
@@ -84,6 +89,9 @@ document.querySelector('.btn--new').addEventListener('click', () => {
     : '';
 
   player2.classList.contains('player--winner')
-    ? player2.classList.remove('player--winner')
+    ? (player2.classList.remove('player--winner'),
+      document
+        .querySelector(`.player--1 > .player--winGif`)
+        .classList.toggle('hidden'))
     : '';
 });

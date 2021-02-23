@@ -159,9 +159,21 @@ main {
 
 .player--winner {
   background-color: #4a88ac;
+  position: relative;
 }
 
 .player--winner .name {
   font-weight: 700;
   color: #38081a;
+}
+.player--winGif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+}
+.hidden {
+  display: none;
 }
