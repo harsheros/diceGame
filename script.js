@@ -22,13 +22,8 @@ dice.style.display = 'none';
 function chanceToggle(ch) {
   player1.classList.toggle('player--active');
   player2.classList.toggle('player--active');
-  if (ch === 1) {
-    player2Current.innerText = 0;
-    chance = 0;
-  } else {
-    player1Current.innerText = 0;
-    chance = 1;
-  }
+  document.querySelector(`#current--${ch}`);
+  chance = ch === 1 ? 0 : 1;
 }
 
 // event handler for the click on roll dice button.
@@ -42,45 +37,29 @@ diceRoll.addEventListener('click', () => {
     chanceToggle(chance); // calling the fuction to toggle the chance.
   } else {
     // calculating the current score of the player 1 & 2
-    if (chance === 0) {
-      player1Current.innerText =
-        Number(player1Current.innerText) + randomNumber;
-    } else if (chance === 1) {
-      player2Current.innerText =
-        Number(player2Current.innerText) + randomNumber;
-    }
+    document.querySelector(`#current--${chance}`).innerText =
+      Number(document.querySelector(`#current--${chance}`).innerText) +
+      randomNumber;
   }
 });
 
 // event handler for the click on hold button.
 hold.addEventListener('click', () => {
-  if (chance === 1) {
-    // calculating the total score of the player 2
-    player2Score.innerText =
-      Number(player2Current.innerText) + Number(player2Score.innerText);
+  // calculating the total score of the player's
+  document.querySelector(`#score--${chance}`).innerText =
+    Number(document.querySelector(`#current--${chance}`).innerText) +
+    Number(document.querySelector(`#score--${chance}`).innerText);
 
-    //checking if the player 2 is winner or not
-    if (player2Score.innerText >= 100) {
-      alert("Player 2 Win's the game !!! ");
-      player2.classList.add('player--winner');
-      diceRoll.disabled = true;
-      hold.disabled = true;
-    }
-    chanceToggle(chance);
-  } else if (chance === 0) {
-    // calculating the total score of the player 1
-    player1Score.innerText =
-      Number(player1Current.innerText) + Number(player1Score.innerText);
-
-    //checking if the player 2 is winner or not
-    if (player1Score.innerText >= 100) {
-      alert("Player 1 Win's the game !!! ");
-      player1.classList.add('player--winner');
-      diceRoll.disabled = true;
-      hold.disabled = true;
-    }
-    chanceToggle(chance);
+  //checking if the current player is winner or not
+  if (document.querySelector(`#score--${chance}`).innerText >= 100) {
+    alert(`Player ${chance + 1} Win's the game !!! `);
+    document
+      .querySelector(`.player--${chance}`)
+      .classList.add('player--winner');
+    diceRoll.disabled = true;
+    hold.disabled = true;
   }
+  chanceToggle(chance);
 });
 
 document.querySelector('.btn--new').addEventListener('click', () => {
