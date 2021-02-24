@@ -18,7 +18,7 @@ let randomNumber,
 // Hidding the dice.
 dice.style.display = 'none';
 
-// function to toggle b/w chances.
+// function to toggle b/w chances & player--active class for player 1 & 2.
 function chanceToggle(ch) {
   player1.classList.toggle('player--active');
   player2.classList.toggle('player--active');
@@ -32,11 +32,11 @@ diceRoll.addEventListener('click', () => {
   dice.src = `dice-${randomNumber}.png`; // changing dice.
   dice.style.display = 'block'; // show the dice.
 
-  // for dice = 1
+  // check for dice number
   if (randomNumber === 1) {
     chanceToggle(chance); // calling the fuction to toggle the chance.
   } else {
-    // calculating the current score of the player 1 & 2
+    // calculating the current score of the current player
     document.querySelector(`#current--${chance}`).innerText =
       Number(document.querySelector(`#current--${chance}`).innerText) +
       randomNumber;
@@ -45,7 +45,7 @@ diceRoll.addEventListener('click', () => {
 
 // event handler for the click on hold button.
 hold.addEventListener('click', () => {
-  // calculating the total score of the player's
+  // calculating the total score of the current player.
   document.querySelector(`#score--${chance}`).innerText =
     Number(document.querySelector(`#current--${chance}`).innerText) +
     Number(document.querySelector(`#score--${chance}`).innerText);
@@ -54,45 +54,58 @@ hold.addEventListener('click', () => {
   if (document.querySelector(`#score--${chance}`).innerText >= 100) {
     document
       .querySelector(`.player--${chance}`)
-      .classList.add('player--winner');
+      .classList.add('player--winner'); // adding player--winner class
     document
       .querySelector(`.player--${chance} > .player--winGif`)
-      .classList.toggle('hidden');
+      .classList.add('hidden');
     document.querySelector('body').style.background =
       'linear-gradient(to top left, #367d82 0%, #2ebf46 100%)';
+
+    // disabling the dice Roll & hold button.
     diceRoll.disabled = true;
     hold.disabled = true;
   }
+
+  // calling the funcrion to toggle the player chance & resting the current score.
   chanceToggle(chance);
 });
 
+// reseting Everything back to initial state
 document.querySelector('.btn--new').addEventListener('click', () => {
-  dice.style.display = 'none';
+  dice.style.display = 'none'; // hiding dice
+
+  // reseting player 1 & 2 current score to 0
   player1Current.innerText = 0;
   player2Current.innerText = 0;
+
+  // reseting player 1 & 2 main score to 0.
   player1Score.innerText = 0;
   player2Score.innerText = 0;
+
+  // making dice roll & hold button clickable again.
   diceRoll.disabled = false;
   hold.disabled = false;
+
+  // reseting the chance to 0 means chance of player 1.
   chance = 0;
+
+  // reseting the background of the game back to initial.
   document.querySelector('body').style.background =
     ' linear-gradient(to top left, #753682 0%, #bf2e34 100%)';
-  player1.classList.contains('player--winner')
-    ? (player1.classList.remove('player--winner'),
-      document
-        .querySelector(`.player--0 > .player--winGif`)
-        .classList.toggle('hidden'))
-    : '';
 
-  !player1.classList.contains('player--active')
-    ? (player1.classList.add('player--active'),
-      player2.classList.remove('player--active'))
-    : '';
+  // removing player--winner class from player 1 & 2 classList
+  player1.classList.remove('player--winner');
+  player2.classList.remove('player--winner');
 
-  player2.classList.contains('player--winner')
-    ? (player2.classList.remove('player--winner'),
-      document
-        .querySelector(`.player--1 > .player--winGif`)
-        .classList.toggle('hidden'))
-    : '';
+  // Adding hidden class to the winGif to hide the you win image.
+  document
+    .querySelector(`.player--0 > .player--winGif`)
+    .classList.add('hidden');
+  document
+    .querySelector(`.player--1 > .player--winGif`)
+    .classList.add('hidden');
+
+  // Making player 1 active & player 2 deactive.
+  player1.classList.add('player--active');
+  player2.classList.remove('player--active');
 });
