@@ -57,7 +57,7 @@ hold.addEventListener('click', () => {
       .classList.add('player--winner'); // adding player--winner class
     document
       .querySelector(`.player--${chance} > .player--winGif`)
-      .classList.add('hidden');
+      .classList.remove('hidden');
     document.querySelector('body').style.background =
       'linear-gradient(to top left, #367d82 0%, #2ebf46 100%)';
 
